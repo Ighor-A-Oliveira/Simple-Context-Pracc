@@ -6,3 +6,9 @@ html, body{
 }
 
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+/* here we can set up custom colors */
+@theme {
+  --color-theme: #800080;
+  --color-theme-dark: #3D0C02;
+}

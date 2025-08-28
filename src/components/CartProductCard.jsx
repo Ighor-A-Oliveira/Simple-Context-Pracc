@@ -11,7 +11,7 @@ export default function CartProductCard({product}) {
         <h1>{title}</h1>
         <img className='h-[100px] w-[100px] my-[25px]' src={image} alt="" />
         <p>R${price}</p>
-        <button className='mt-[15px] bg-gray-600 p-2 rounded-md hover:bg-gray-300 cursor-pointer'
+        <button className='mt-[15px] bg-gray-600 p-2 rounded-md hover:bg-gray-300 cursor-pointer hover:text-gray-900'
             /* on click add to cart, here it is very important to spread the data inside an object {...product} or to just send the product itself */
             onClick={() => addToCart(product)}
         >

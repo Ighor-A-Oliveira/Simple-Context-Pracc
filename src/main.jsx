@@ -2,15 +2,13 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
-import { CounterProvider } from './context/Context.jsx'
-import CartProvider from './context/CartContext.jsx'
+import AppProvider from './context/AppProvider.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <CounterProvider>
-      <CartProvider >
+    {/* this single provider component bundles all of the context provider inside it */}
+    <AppProvider>
       <App />
-    </CartProvider>
-    </CounterProvider>
+    </AppProvider>
   </StrictMode>,
 )

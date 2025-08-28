@@ -1,6 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { createContext, useContext, useState } from "react";
 
+//still need to add the logic to remove items from the cart
+// need to improve the logic to decrement items from the cart
+//need to figure out how the cart quantity can respect the quantity of items in stock so it does no go over it
+
 const CartContext = createContext();
 
 export default function CartProvider({children}) {
@@ -39,29 +43,25 @@ export default function CartProvider({children}) {
             )
     }
 
-    function decrementItemByOne(product){
-        setCartItems(prev => 
-                /* we are iterating over the existing data */
-                prev.map(
-                    /* we check if there is an item with this specific id */
-                    item => item.id === product.id 
-                    ? 
-                        product.quantity === 1 ? 
-                            /* if there an item we spread the existing properties and just modify the quantity */
-                            (null)
-                        :
-                            /* if there an item we spread the existing properties and just modify the quantity */
-                            {...item, quantity:item.quantity-1}
-                    :
-                        /* otherwise we just return the item itself */
-                        item
-
-                )
-            )
+    function decrementItemByOne(product) {
+    setCartItems(prev =>
+        prev.flatMap(item => {
+        if (item.id === product.id) {
+            if (item.quantity === 1) {
+            // remove by not returning it
+            return [];
+            } else {
+            // decrement
+            return { ...item, quantity: item.quantity - 1 };
+            }
+        }
+        return item;
+        })
+    );
     }
 
     function removeFromCart(product){
-
+        setCartItems((prev) => prev.filter(item => item.id != product.id))
     }
 
     function totalCostOfCart(){
